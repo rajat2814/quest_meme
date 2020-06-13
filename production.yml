@@ -1,0 +1,46 @@
+version: '2'
+
+volumes:
+  production_postgres_data: {}
+  production_postgres_data_backups: {}
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+    image: quest_meme_production_django
+    depends_on:
+      - postgres
+    env_file:
+      - ./.envs/.production/.django
+      - ./.envs/.production/.postgres
+    command: /start
+
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: quest_meme_production_postgres
+    volumes:
+      - production_postgres_data:/var/lib/postgresql/data
+      - production_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.production/.postgres
+
+
+
+  nginx:
+    build: 
+      context: .
+      dockerfile: ./compose/production/nginx/Dockerfile
+    depends_on:
+      - django
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
+    links:
+      - django
+    volumes_from:
+      - django

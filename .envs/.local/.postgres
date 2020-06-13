@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=quest_meme
+POSTGRES_USER=ZfMWsmdqMgWIrSbpUugRqqcBfyTxmzAm
+POSTGRES_PASSWORD=PbQBk3tFn4u2QRnmFAiUyXw8dVmXu0jlnLoslCNIp6Tx5BAbZDlF9JbCXoixy9M8
